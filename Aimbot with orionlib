@@ -1,0 +1,23 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "RX V1 hub", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Aimbot script",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Aimbot workingðŸŸ¢"
+})
+
+Tab:AddToggle({
+	Name = "Aimbot",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/officialmodded2-max/Universal-script/refs/heads/main/Aimbot%20script%20working%F0%9F%9F%A2"))()
+	end    
+})
+
+OrionLib:Init()
