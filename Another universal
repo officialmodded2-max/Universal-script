@@ -1,0 +1,289 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Rx hub by rblxrivalsscript [UPDATED❄️]", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "Rx hub universal script working",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Rx hub universal script"
+})
+
+
+Tab:AddButton({
+	Name = "rx hub unversal script by rblxscriptrivals",
+	Callback = function()
+      		print("button pressed")
+		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("rx hub Universal script📌 by rblxscriptrivals", "Ocean")
+local Tab = Window:NewTab("sniper duels script")
+
+local Section = Tab:NewSection("silent aim,esp script for sniper duels")
+Section:NewButton("sniper duels script OP", "OG", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/zenss555a/script/refs/heads/main/SNIPER-DUELS.lua"))()
+end)
+
+local Tab = Window:NewTab("99 nights script")
+
+local Section = Tab:NewSection("OP features foxname hub")
+Section:NewButton("execute foxname hub for 99 nights", "OG", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua"))()
+end)
+
+local Tab = Window:NewTab("Rivals kiciahook v2 🗝️")
+
+local Section = Tab:NewSection("silent aim,esp,skin changer,and more")
+Section:NewButton("execute kiciahook v2 🗝️", "OG", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.lua"))()
+end)
+
+local Tab = Window:NewTab("MVS")
+
+local Section = Tab:NewSection("murderer vs sheriff duels")
+Section:NewButton("zephyr v2 MVS", "OG", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealAvrwm/Zephyr-V2/refs/heads/main/script.lua", true))()
+end)
+
+local Tab = Window:NewTab("slap battles cludehub")
+
+local Section = Tab:NewSection("cludehub updated no key working🟢")
+Section:NewButton("Execute cludehub updated", "ButtonInfo", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Slap-Battles-Scripts/refs/heads/main/CludeHub"))()
+end)
+
+local Tab = Window:NewTab("da hood script no key")
+
+local Section = Tab:NewSection("no key needed it's free working🟢")
+Section:NewButton("execute da hood script", "OG", function()
+loadstring(game:HttpGet("https://pastebin.com/raw/h365G7Rj"))()
+end)
+
+local Tab = Window:NewTab("speeling bee script")
+
+local Section = Tab:NewSection("preppy hub V2.85 speeling bee script")
+Section:NewButton("execute preppy hub", "OG", function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/PreppyHub/PreppyHub/refs/heads/main/SpellingBee"))()
+end)
+
+local Tab = Window:NewTab("coming later!")
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "Rivals",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Rivals kiciahook v2"
+})
+
+Tab:AddButton({
+	Name = "Rivals kiciahook v2 (🔐)",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.lua"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "naval warfare (🔐)",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+local Section = Tab:AddSection({
+	Name = "naval warfare script"
+})
+
+Tab:AddButton({
+	Name = "execute naval warfare script",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/KGuestCheatsJReal/ComeBack/refs/heads/main/Universal"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "da hood script no key",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "da hood script no key"
+})
+
+
+Tab:AddButton({
+	Name = "da hood script",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/shakar60/scripts/refs/heads/main/psalms",true))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "99 nights",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "99 nights in the forest no key"
+})
+
+
+Tab:AddButton({
+	Name = "execute foxname hub",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/caomod2077/Script/refs/heads/main/FoxnameHub.lua"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "slap battles",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "cludehub updated no key"
+})
+
+
+Tab:AddButton({
+	Name = "cludehub updated",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/CludeHub/Slap-Battles-Scripts/refs/heads/main/CludeHub"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "MVSD",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "MVSD no key"
+})
+
+
+Tab:AddButton({
+	Name = "zephyr v2 no key",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/TheRealAvrwm/Zephyr-V2/refs/heads/main/script.lua", true))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "sniper duels",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "sniper duels script no key needed"
+})
+
+
+Tab:AddButton({
+	Name = "execute sniper duels script (risky to make you banned)",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/zenss555a/script/refs/heads/main/SNIPER-DUELS.lua"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "flick",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "flick script no key"
+})
+
+
+Tab:AddButton({
+	Name = "flick script no key",
+	Callback = function()
+      		print("button pressed")
+      --[[
+	WARNING: Heads up! This script has not been verified by ScriptBlox. Use at your own risk!
+]]
+getgenv().unxns = { loadfrom = "ScriptBlox" } -- you can edit this btw, if you are an content creator (or not idk!!)
+
+loadstring(game:HttpGet("https://apigetunx.vercel.app/UNX.lua",true))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "spelling bee",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "preppy hub no key working🟢"
+})
+
+
+Tab:AddButton({
+	Name = "execute preppy hub no key script",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/PreppyHub/PreppyHub/refs/heads/main/SpellingBee"))()
+  	end    
+})
+
+OrionLib:Init()
+
+local Tab = Window:MakeTab({
+	Name = "prison life",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "prison life no key"
+})
+
+
+Tab:AddButton({
+	Name = "execute prison life script no key",
+	Callback = function()
+      		print("button pressed")
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/zenss555a/script/refs/heads/main/Prison-Life.lua", true))()
+  	end    
+})
+
+OrionLib:Init()
