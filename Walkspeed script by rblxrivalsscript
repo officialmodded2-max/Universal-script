@@ -1,0 +1,179 @@
+-- Services
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+
+local player = Players.LocalPlayer
+local defaultSpeed = 16
+local enabled = false
+
+-- =========================
+-- MAIN WALKSPEED GUI
+-- =========================
+local mainGui = Instance.new("ScreenGui")
+mainGui.Name = "MainWalkSpeedGui"
+mainGui.ResetOnSpawn = false
+mainGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 260, 0, 150)
+frame.Position = UDim2.new(0.5, -130, 0.5, -75)
+frame.BackgroundColor3 = Color3.fromRGB(30,30,30)
+frame.Visible = false
+frame.Active = true
+frame.Parent = mainGui
+Instance.new("UICorner", frame)
+
+-- Author
+local author = Instance.new("TextLabel")
+author.Size = UDim2.new(1,0,0,25)
+author.BackgroundTransparency = 1
+author.Text = "by rblxrivalsscript"
+author.TextColor3 = Color3.new(1,1,1)
+author.Font = Enum.Font.GothamBold
+author.TextScaled = true
+author.Parent = frame
+
+-- Game name
+local gameName = Instance.new("TextLabel")
+gameName.Size = UDim2.new(1,0,0,20)
+gameName.Position = UDim2.new(0,0,0,25)
+gameName.BackgroundTransparency = 1
+gameName.Text = "Don't Get Crushed by 67"
+gameName.TextColor3 = Color3.fromRGB(180,180,180)
+gameName.Font = Enum.Font.Gotham
+gameName.TextScaled = true
+gameName.Parent = frame
+
+-- Credits
+local credits = Instance.new("TextLabel")
+credits.Size = UDim2.new(1,0,0,20)
+credits.Position = UDim2.new(0,0,0,45)
+credits.BackgroundTransparency = 1
+credits.Text = "Credits: ChatGPT"
+credits.TextColor3 = Color3.fromRGB(140,140,140)
+credits.Font = Enum.Font.Gotham
+credits.TextScaled = true
+credits.Parent = frame
+
+-- 🔹 TextBox with placeholder
+local speedBox = Instance.new("TextBox")
+speedBox.Size = UDim2.new(1,-20,0,40)
+speedBox.Position = UDim2.new(0,10,0,70)
+speedBox.PlaceholderText = "Set Speed Here"  -- 👈 Hint for player
+speedBox.Text = "100" -- default speed
+speedBox.BackgroundColor3 = Color3.fromRGB(45,45,45)
+speedBox.TextColor3 = Color3.new(1,1,1)
+speedBox.Font = Enum.Font.Gotham
+speedBox.ClearTextOnFocus = false
+speedBox.Parent = frame
+Instance.new("UICorner", speedBox)
+
+-- Toggle Button
+local toggle = Instance.new("TextButton")
+toggle.Size = UDim2.new(1,-20,0,45)
+toggle.Position = UDim2.new(0,10,0,115)
+toggle.Text = "WalkSpeed: OFF"
+toggle.BackgroundColor3 = Color3.fromRGB(120,40,40)
+toggle.TextColor3 = Color3.new(1,1,1)
+toggle.Font = Enum.Font.GothamBold
+toggle.TextScaled = true
+toggle.Parent = frame
+Instance.new("UICorner", toggle)
+
+-- Speed logic
+local function applySpeed()
+	local char = player.Character
+	if not char then return end
+	local hum = char:FindFirstChildOfClass("Humanoid")
+	if not hum then return end
+
+	if enabled then
+		local speed = tonumber(speedBox.Text)
+		if speed then hum.WalkSpeed = speed end
+	else
+		hum.WalkSpeed = defaultSpeed
+	end
+end
+
+toggle.MouseButton1Click:Connect(function()
+	enabled = not enabled
+
+	if enabled then
+		toggle.Text = "WalkSpeed: ON"
+		toggle.BackgroundColor3 = Color3.fromRGB(40,120,40)
+	else
+		toggle.Text = "WalkSpeed: OFF"
+		toggle.BackgroundColor3 = Color3.fromRGB(120,40,40)
+	end
+
+	applySpeed()
+end)
+
+speedBox.FocusLost:Connect(function()
+	if enabled then applySpeed() end
+end)
+
+player.CharacterAdded:Connect(function()
+	task.wait(1)
+	applySpeed()
+end)
+
+-- =========================
+-- EXTERNAL OPEN/CLOSE GUI BUTTON
+-- =========================
+local toggleGui = Instance.new("ScreenGui")
+toggleGui.Name = "OpenCloseGui"
+toggleGui.ResetOnSpawn = false
+toggleGui.Parent = player.PlayerGui
+
+local openBtn = Instance.new("TextButton")
+openBtn.Size = UDim2.new(0,150,0,40)
+openBtn.Position = UDim2.new(0,20,0.6,0)
+openBtn.Text = "Open WalkSpeed"
+openBtn.BackgroundColor3 = Color3.fromRGB(50,50,50)
+openBtn.TextColor3 = Color3.new(1,1,1)
+openBtn.Font = Enum.Font.GothamBold
+openBtn.TextScaled = true
+openBtn.Active = true
+openBtn.Parent = toggleGui
+Instance.new("UICorner", openBtn)
+
+openBtn.MouseButton1Click:Connect(function()
+	frame.Visible = not frame.Visible
+	openBtn.Text = frame.Visible and "Close WalkSpeed" or "Open WalkSpeed"
+end)
+
+-- =========================
+-- DRAGGABLE OPEN BUTTON
+-- =========================
+local dragging = false
+local dragStart, startPos
+
+openBtn.InputBegan:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1
+	or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = true
+		dragStart = input.Position
+		startPos = openBtn.Position
+	end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+	if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement
+	or input.UserInputType == Enum.UserInputType.Touch) then
+		local delta = input.Position - dragStart
+		openBtn.Position = UDim2.new(
+			startPos.X.Scale,
+			startPos.X.Offset + delta.X,
+			startPos.Y.Scale,
+			startPos.Y.Offset + delta.Y
+		)
+	end
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+	if input.UserInputType == Enum.UserInputType.MouseButton1
+	or input.UserInputType == Enum.UserInputType.Touch then
+		dragging = false
+	end
+end)
