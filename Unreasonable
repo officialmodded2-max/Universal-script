@@ -1,0 +1,156 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Rx hub V1 [UNREALESE] SCRIPT (early access)", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+	Name = "locks on player script",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Tab:AddSection({
+	Name = "Lock on script early accessðŸŸ¢"
+})
+
+
+Tab:AddButton({
+	Name = "locks on player (visible only,head only)",
+	Callback = function()
+      		print("button pressed")
+      -- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+-- Settings
+local LOCK_RANGE = 150
+local LockEnabled = false
+local CurrentTarget = nil
+
+-- GUI
+local gui = Instance.new("ScreenGui")
+gui.Name = "HeadLockGui"
+gui.ResetOnSpawn = false
+gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+
+local button = Instance.new("TextButton")
+button.Size = UDim2.fromScale(0.18, 0.07)
+button.Position = UDim2.fromScale(0.02, 0.9)
+button.Text = "Lock: OFF"
+button.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Parent = gui
+
+-- Toggle
+button.MouseButton1Click:Connect(function()
+	LockEnabled = not LockEnabled
+	button.Text = LockEnabled and "Lock: ON" or "Lock: OFF"
+	CurrentTarget = nil
+end)
+
+-- Visibility check
+local function isVisible(targetPart)
+	local origin = Camera.CFrame.Position
+	local direction = (targetPart.Position - origin)
+
+	local params = RaycastParams.new()
+	params.FilterType = Enum.RaycastFilterType.Blacklist
+	params.FilterDescendantsInstances = {LocalPlayer.Character}
+
+	local ray = workspace:Raycast(origin, direction, params)
+
+	return ray and ray.Instance:IsDescendantOf(targetPart.Parent)
+end
+
+-- Find closest visible head
+local function getTarget()
+	local closest = nil
+	local shortest = LOCK_RANGE
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character then
+			local head = player.Character:FindFirstChild("Head")
+			local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+
+			if head and humanoid and humanoid.Health > 0 then
+				local dist = (Camera.CFrame.Position - head.Position).Magnitude
+				if dist < shortest and isVisible(head) then
+					shortest = dist
+					closest = head
+				end
+			end
+		end
+	end
+
+	return closest
+end
+
+-- Camera lock
+RunService.RenderStepped:Connect(function()
+	if not LockEnabled then return end
+
+	if not CurrentTarget or not isVisible(CurrentTarget) then
+		CurrentTarget = getTarget()
+	end
+
+	if CurrentTarget then
+		Camera.CFrame = CFrame.new(
+			Camera.CFrame.Position,
+			CurrentTarget.Position
+		)
+	end
+end)
+  	end    
+})
+
+OrionLib:Init()
+
+Tab:AddToggle({
+	Name = "esp",
+	Default = false,
+	Callback = function(Value)
+		print(Value)
+		local Players = game:GetService("Players")
+
+-- Function to highlight a player
+local function highlightPlayer(player)
+    -- Check if character exists
+    if player.Character and not player.Character:FindFirstChild("Highlight") then
+        local highlight = Instance.new("Highlight")
+        highlight.Adornee = player.Character
+        highlight.FillColor = Color3.fromRGB(0, 255, 0) -- green for visibility
+        highlight.FillTransparency = 0.5
+        highlight.OutlineTransparency = 0
+        highlight.Parent = player.Character
+    end
+end
+
+-- Function to remove highlight
+local function removeHighlight(player)
+    if player.Character and player.Character:FindFirstChild("Highlight") then
+        player.Character.Highlight:Destroy()
+    end
+end
+
+-- Highlight all players initially
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= Players.LocalPlayer then
+        highlightPlayer(player)
+    end
+end
+
+-- Highlight new players that join
+Players.PlayerAdded:Connect(function(player)
+    player.CharacterAdded:Connect(function()
+        highlightPlayer(player)
+    end)
+end)
+
+-- Remove highlight when a player leaves
+Players.PlayerRemoving:Connect(function(player)
+    removeHighlight(player)
+end)
+	end    
+})
+
+OrionLib:Init()
