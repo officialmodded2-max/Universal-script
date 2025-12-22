@@ -1,0 +1,70 @@
+-- Services
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local Camera = workspace.CurrentCamera
+
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+
+-- Settings
+local ENABLED = false
+local FOV_RADIUS = 120 -- pixels
+local SMOOTHNESS = 0.15
+
+-- Toggle key
+UserInputService.InputBegan:Connect(function(input, gp)
+	if gp then return end
+	if input.KeyCode == Enum.KeyCode.E then
+		ENABLED = not ENABLED
+	end
+end)
+
+-- Line of sight check
+local function isVisible(part)
+	local origin = Camera.CFrame.Position
+	local direction = (part.Position - origin)
+
+	local rayParams = RaycastParams.new()
+	rayParams.FilterDescendantsInstances = {LocalPlayer.Character}
+	rayParams.FilterType = Enum.RaycastFilterType.Blacklist
+
+	local result = workspace:Raycast(origin, direction, rayParams)
+	return result and result.Instance:IsDescendantOf(part.Parent)
+end
+
+-- Get closest visible head to crosshair
+local function getTarget()
+	local closest
+	local shortest = FOV_RADIUS
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer and player.Character then
+			local head = player.Character:FindFirstChild("Head")
+			local hum = player.Character:FindFirstChild("Humanoid")
+			if head and hum and hum.Health > 0 and isVisible(head) then
+				local screenPos, onScreen = Camera:WorldToViewportPoint(head.Position)
+				if onScreen then
+					local dist = (Vector2.new(screenPos.X, screenPos.Y) -
+						Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+					if dist < shortest then
+						shortest = dist
+						closest = head
+					end
+				end
+			end
+		end
+	end
+
+	return closest
+end
+
+RunService.RenderStepped:Connect(function()
+	if not ENABLED then return end
+
+	local target = getTarget()
+	if target then
+		local targetCF = CFrame.new(Camera.CFrame.Position, target.Position)
+		Camera.CFrame = Camera.CFrame:Lerp(targetCF, SMOOTHNESS)
+	end
+end)
